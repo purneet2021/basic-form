@@ -1,0 +1,118 @@
+<html>
+<head>
+    <title>About Me</title>
+    <style>
+        table{
+            position: fixed;
+            border: 2px dotted blue;
+            background-color: peachpuff;
+            right: 40%;
+            top:20%;
+        }
+        th,td{
+            text-align: center;
+            border: 1px solid firebrick;
+            vertical-align: center;
+            height: auto;
+        }
+        #invis{
+            position: relative;
+            left: 45%;
+        }
+    </style>
+</head>
+<body style="background-color: powderblue;">
+    <table width="500px">
+        <form name='frm'>
+            <tr>
+                <th>First name:</th>
+                <td><input type="text"size='20' name='fname' id='fname'></td>
+            </tr> 
+            <tr>
+                <th>Last name:</th>
+                <td><input type="text" size='20' name='lname' id='lname'></td>
+            </tr>
+            <tr>
+                <td colspan="2">Favourite types of music:</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type='checkbox' name="song" value='rock'>Rock<br>
+                    <input type="checkbox" name='song' value='classical'>Classical<br>
+                    <input type="checkbox" name='song' value='pop'>Pop<br>
+                    <input type="checkbox" name='song' value='rap'>Rap<br>
+                    <input type="checkbox" name='song' value="techno">Techno
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" text-align="left">Any programming languages known?</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select id='yorn' name='yorn' required onchange="create()">
+                        <option value='not done'>Choose</option>           
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </td>
+            </tr>              
+            <tr width="500px" id="invis" style="display: none;">
+                <td colspan="2">
+                    <input type='radio' name='lang' value='c'>C
+                    <input type='radio' name='lang' value='cplusplus'>C++
+                    <input type='radio' name='lang' value='Java'>Java
+                    <input type='radio' name='lang' value='Python'>Python
+                </td>
+                    </tr>   
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="submit" id='submit' disabled>
+                </td>
+            </tr>
+        </form>
+    </table>    
+    <script>
+        function create(){
+            var sel= document.getElementsByTagName('select')[0].selectedIndex;
+            if(sel==1)
+                document.getElementById("invis").style.display="inline";
+            else
+                document.getElementById("invis").style.display="none";
+            if(sel)
+                document.getElementById("submit").disabled=false;
+            else
+                document.getElementById("submit").disabled=true;            
+        }
+        document.frm.onsubmit=validate;
+        function validate(){
+            var str1=document.forms[0].fname.value;
+            var str2=document.frm.lname.value;    
+            if((str1.length<2)||(str2.length<2)){
+                alert("More than 2 characters should be present.");
+                return false;
+            }
+            str1.CharAt(0).toUpperCase();
+            str2.CharAt(0).toUpperCase();
+            var rad=document.getElementsByName('lang');
+            var sel=document.frm.yorn.selectedIndex;
+            if(sel==1){
+                if(rad){
+                    var k=0;
+                    for(i in rad){
+                        if(rad[i].checked==true){
+                            k=1;
+                            break;
+                        }
+                    }
+                }
+                if(!k){
+                    alert("Select the language");
+                    return false;
+                }
+            }
+            return true; 
+        }
+    </script>
+</body>
+</html>       
+        
